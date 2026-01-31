@@ -33,6 +33,14 @@ jobs:
     - name: Build Mod
       run: dotnet build "${{ env.CSPROJ_PATH }}" --configuration Release --no-restore
 
+    - name: Copy Mod Data Files
+      run: |
+        mkdir -p output/Orbital-Cannons
+        cp -r 1.6/Defs output/Orbital-Cannons/
+        cp -r About output/Orbital-Cannons/
+        cp -r Textures output/Orbital-Cannons/
+        cp -r Languages output/Orbital-Cannons/
+
     - name: Upload Mod Artifacts
       uses: actions/upload-artifact@v4
       with:
