@@ -158,6 +158,10 @@ namespace Orbital_Cannons
 
         private Command_VerbTarget CreateVerbTargetCommand(Thing gear, Verb verb)
         {
+            if (verb == null)
+            {
+                verb = VerbTracker.AllVerbs.First();
+            }
             Command_VerbOwner command_VerbOwner = new Command_VerbOwner(this);
             command_VerbOwner.defaultDesc = gear.def.description;
             command_VerbOwner.hotKey = Props.hotKey;
