@@ -1,0 +1,41 @@
+name: Build Orbital Cannons
+
+env:
+  CSPROJ_PATH: Source/Orbital Cannons.csproj
+  OUTPUT_PATH: output/Orbital-Cannons/Assemblies/
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - master
+    paths-ignore:
+      - 'README.md'
+
+jobs:
+  build:
+    name: Build Orbital Cannons
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout Repository
+      uses: actions/checkout@v3
+      with:
+        submodules: recursive
+
+    - name: Setup Dotnet
+      uses: actions/setup-dotnet@v2
+      with:
+        dotnet-version: 8.0.x
+
+    - name: Install Mod Dependencies
+      run: dotnet restore ${{ env.CSPROJ_PATH }}
+
+    - name: Build Mod
+      run: dotnet build ${{ env.CSPROJ_PATH }} --configuration Release --no-restore
+
+    - name: Upload Mod Artifacts
+      uses: actions/upload-artifact@v4
+      with:
+        name: Orbital-Cannons-beta
+        path: |
+          output/
