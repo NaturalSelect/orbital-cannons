@@ -28,10 +28,10 @@ jobs:
         dotnet-version: 8.0.x
 
     - name: Install Mod Dependencies
-      run: dotnet restore ${{ env.CSPROJ_PATH }}
+      run: dotnet restore "${{ env.CSPROJ_PATH }}"
 
     - name: Build Mod
-      run: dotnet build ${{ env.CSPROJ_PATH }} --configuration Release --no-restore
+      run: dotnet build "${{ env.CSPROJ_PATH }}" --configuration Release --no-restore
 
     - name: Upload Mod Artifacts
       uses: actions/upload-artifact@v4
